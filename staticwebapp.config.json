@@ -1,0 +1,18 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  },
+  "platform": {
+    "apiRuntime": "none"
+  },
+  "buildProperties": {
+    "skipBuild": true
+  },
+  "routes": [
+    {
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
+    }
+  ]
+}
