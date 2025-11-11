@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://luciano-amos-portfolio.azurewebsites.net/index.html</loc>
+        <loc>https://luciano-amos-portfolio.vercel.app/</loc>
         <lastmod>2025-11-11</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://luciano-amos-portfolio.azurewebsites.net/experiencia.html</loc>
+        <loc>https://luciano-amos-portfolio.vercel.app/index.html</loc>
+        <lastmod>2025-11-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://luciano-amos-portfolio.vercel.app/experiencia.html</loc>
         <lastmod>2025-11-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://luciano-amos-portfolio.azurewebsites.net/tecnologias.html</loc>
+        <loc>https://luciano-amos-portfolio.vercel.app/tecnologias.html</loc>
         <lastmod>2025-11-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://luciano-amos-portfolio.azurewebsites.net/competencias.html</loc>
+        <loc>https://luciano-amos-portfolio.vercel.app/competencias.html</loc>
         <lastmod>2025-11-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://luciano-amos-portfolio.azurewebsites.net/certificacoes.html</loc>
+        <loc>https://luciano-amos-portfolio.vercel.app/certificacoes.html</loc>
         <lastmod>2025-11-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
