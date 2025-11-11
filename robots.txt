@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /img/
+
+Sitemap: https://luciano-amos-portfolio.azurewebsites.net/sitemap.xml
+
+# Crawl delay (em segundos)
+Crawl-delay: 1
+
+# Regras específicas para bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /

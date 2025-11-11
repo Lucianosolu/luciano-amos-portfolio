@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Agile Enterprise Coach Logo -->
+  <rect width="200" height="200" fill="#27ae60" rx="10"/>
+  <text x="100" y="120" font-size="36" font-weight="bold" fill="white" text-anchor="middle" font-family="Arial">AGILE</text>
+  <text x="100" y="160" font-size="12" fill="white" text-anchor="middle" font-family="Arial">Scrum Master</text>
+</svg>

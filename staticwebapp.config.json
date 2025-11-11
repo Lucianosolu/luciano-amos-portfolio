@@ -1,0 +1,78 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  },
+  "platform": {
+    "apiRuntime": "none"
+  },
+  "buildProperties": {
+    "skipBuild": true
+  },
+  "routes": [
+    {
+      "route": "/*.html",
+      "headers": {
+        "Cache-Control": "public, max-age=3600, must-revalidate"
+      }
+    },
+    {
+      "route": "/*.css",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/*.js",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/*.svg",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/*.png",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/*.jpg",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/*.jpeg",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/manifest.json",
+      "headers": {
+        "Cache-Control": "public, max-age=3600, must-revalidate"
+      }
+    },
+    {
+      "route": "/sitemap.xml",
+      "headers": {
+        "Cache-Control": "public, max-age=86400, must-revalidate"
+      }
+    },
+    {
+      "route": "/robots.txt",
+      "headers": {
+        "Cache-Control": "public, max-age=86400, must-revalidate"
+      }
+    },
+    {
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
+    }
+  ]
+}

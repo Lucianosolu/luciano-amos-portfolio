@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" fill="#17a2b8" rx="20"/>
+  
+  <!-- Shield -->
+  <path d="M 50 15 L 30 25 L 30 50 Q 30 70 50 85 Q 70 70 70 50 L 70 25 Z" fill="#ffffff" stroke="#17a2b8" stroke-width="2"/>
+  
+  <!-- Lock inside shield -->
+  <circle cx="50" cy="50" r="8" fill="#17a2b8"/>
+  <rect x="46" y="58" width="8" height="12" fill="#17a2b8"/>
+</svg>

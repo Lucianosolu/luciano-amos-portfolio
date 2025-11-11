@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles */
+@layer base {
+  body {
+    @apply bg-background text-text transition-colors duration-300;
+  }
+
+  html.dark {
+    @apply bg-gray-900 text-white;
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  .btn-primary {
+    @apply bg-primary hover:bg-opacity-90 text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 transition-all duration-300;
+  }
+
+  .card:hover {
+    @apply transform -translate-y-1 shadow-xl;
+  }
+
+  .section-title {
+    @apply text-4xl font-bold mb-8 text-center;
+  }
+
+  .subsection-title {
+    @apply text-2xl font-semibold mb-6;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent;
+  }
+
+  .smooth-scroll {
+    @apply scroll-smooth;
+  }
+}

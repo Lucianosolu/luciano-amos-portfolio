@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- LinkedIn Logo -->
+  <rect width="200" height="200" fill="#0077b5" rx="10"/>
+  <text x="100" y="120" font-size="44" font-weight="bold" fill="white" text-anchor="middle" font-family="Arial">in</text>
+  <text x="100" y="160" font-size="12" fill="white" text-anchor="middle" font-family="Arial">LinkedIn</text>
+</svg>

@@ -1,0 +1,33 @@
+/* Tailwind CSS - Production Build */
+/* Este arquivo deve ser gerado com: npx tailwindcss -i ./input.css -o ./tailwind.css --minify */
+
+/* Para usar em produção, instale Tailwind CSS localmente:
+   npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init -p
+   
+   Depois atualize o tailwind.config.js:
+   module.exports = {
+     content: [
+       "./index.html",
+       "./experiencia.html",
+       "./tecnologias.html",
+       "./competencias.html",
+       "./certificacoes.html"
+     ],
+     theme: {
+       extend: {
+         colors: {
+           primary: '#17a2b8',
+           background: '#f8f9fa',
+           text: '#343a40',
+         }
+       }
+     },
+     plugins: [],
+   }
+   
+   E execute: npx tailwindcss -i ./input.css -o ./tailwind.css --minify
+*/
+
+/* Nota: Para desenvolvimento, o CDN é aceitável.
+   Para produção, use o arquivo compilado acima. */

@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="pt" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Certificações Profissionais - Especialista em Segurança Integrada & TI">
+    <meta name="keywords" content="certificações, segurança, TI, ISO, CSO, Cisco">
+    <meta name="author" content="Luciano Amós">
+    <title>Certificações - Especialista em Segurança Integrada & TI</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#17a2b8">
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        :root {
+            --primary: #17a2b8;
+            --background: #f8f9fa;
+            --text: #343a40;
+            --card-bg: #ffffff;
+            --border: rgba(0, 0, 0, 0.1);
+        }
+
+        html.dark {
+            --primary: #20c997;
+            --background: #1a1a1a;
+            --text: #f8f9fa;
+            --card-bg: #2d2d2d;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        .cert-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .cert-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cert-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            z-index: 1;
+        }
+
+        .cert-verify {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .cert-verify:hover {
+            background: #138496;
+            transform: translateY(-2px);
+        }
+
+        .cert-verify i {
+            font-size: 0.75rem;
+        }
+
+        .cert-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: white;
+            padding: 4px;
+        }
+
+        .dark .cert-logo {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .cert-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .cert-tag i {
+            font-size: 0.625rem;
+        }
+
+        .focus-visible:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .user-is-tabbing .focus-visible:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .cert-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+
+        .cert-date i {
+            color: var(--primary);
+        }
+
+        /* Estilos do Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 1200px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 25px;
+            top: 10px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: #bbb;
+        }
+
+        .cert-image-preview {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .cert-image-preview:hover {
+            opacity: 0.8;
+        }
+
+        /* Estilos do logo Udemy */
+        .udemy-logo {
+            width: 48px;
+            height: 32px;
+            object-fit: contain;
+            border-radius: 4px;
+            background: white;
+            padding: 4px;
+            filter: brightness(0) invert(1);
+        }
+
+        .dark .udemy-logo {
+            filter: none;
+            background: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm">
+        <nav class="bg-white shadow-lg fixed w-full z-50">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex justify-between">
+                    <div class="flex space-x-7">
+                        <a href="index.html" class="flex items-center py-4">
+                            <span class="font-semibold text-primary text-lg">Portfólio Profissional</span>
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="experiencia.html" class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Experiência</a>
+                        <a href="tecnologias.html" class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Tecnologias</a>
+                        <a href="competencias.html" class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Competências</a>
+                        <a href="certificacoes.html" class="py-4 px-2 text-primary border-b-2 border-primary">Certificações</a>
+                    </div>
+                    <!-- Botão Mobile -->
+                    <div class="md:hidden flex items-center">
+                        <button class="outline-none mobile-menu-button">
+                            <i class="fas fa-bars text-gray-500 text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Menu Mobile -->
+            <div class="hidden mobile-menu">
+                <ul class="">
+                    <li><a href="experiencia.html" class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Experiência</a></li>
+                    <li><a href="tecnologias.html" class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Tecnologias</a></li>
+                    <li><a href="competencias.html" class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Competências</a></li>
+                    <li><a href="certificacoes.html" class="block text-sm px-2 py-4 bg-primary text-white">Certificações</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 pt-24">
+        <!-- Introdução Profissional -->
+        <section class="mb-12 text-center max-w-4xl mx-auto" data-aos="fade-up">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                
+                <h1 class="text-4xl font-bold mb-4">Luciano Amós</h1>
+                <h2 class="text-2xl text-primary mb-6">Especialista em Segurança Integrada & Gestão Corporativa</h2>
+                
+                <p class="text-lg mb-6 leading-relaxed">
+                    🛡️ Chief Security Officer (CSO) com mais de 12 anos de experiência em segurança corporativa integrada, 
+                    combinando expertise em proteção física e digital. Certificado em gestão executiva pelo Institute of 
+                    Management, Technology and Finance (MTF).
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="text-left">
+                        <h3 class="font-semibold mb-3 text-primary">Áreas de Especialização</h3>
+                        <ul class="space-y-2">
+                            <li><i class="fas fa-shield-alt mr-2"></i>Gestão de Segurança Corporativa</li>
+                            <li><i class="fas fa-video mr-2"></i>Sistemas CCTV & Infraestrutura</li>
+                            <li><i class="fas fa-laptop-code mr-2"></i>Suporte Técnico N1/N2</li>
+                            <li><i class="fas fa-project-diagram mr-2"></i>Gestão de Projetos de Segurança</li>
+                        </ul>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="font-semibold mb-3 text-primary">Certificações Principais</h3>
+                        <ul class="space-y-2">
+                            <li><i class="fas fa-certificate mr-2"></i>CSO Executive Certification</li>
+                            <li><i class="fas fa-briefcase mr-2"></i>Office Management Professional</li>
+                            <li><i class="fas fa-user-tie mr-2"></i>Freelancing Professional</li>
+                            <li><i class="fas fa-shield-virus mr-2"></i>Analista SOC Certificado</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex justify-center space-x-4">
+                    <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full">
+                        <i class="fas fa-check-circle mr-2"></i>Consultoria Especializada
+                    </span>
+                    <span class="px-4 py-2 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100 rounded-full">
+                        <i class="fas fa-star mr-2"></i>Gestão de Equipes
+                    </span>
+                    <span class="px-4 py-2 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 rounded-full">
+                        <i class="fas fa-chart-line mr-2"></i>Melhoria Contínua
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <h1 class="text-4xl font-bold mb-8 text-center">Certificações Profissionais</h1>
+        
+        <!-- Certificações de Segurança e TI -->
+        <section class="mb-12" data-aos="fade-up">
+            <h2 class="text-2xl font-semibold mb-6">Segurança e TI</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- CSO Certification -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">CSO</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/institute-logo.svg" alt="Institute Logo" class="cert-logo mr-4" loading="lazy">
+                        <div>
+                            <h3 class="font-semibold">CSO CHIEF SECURITY OFFICER EXECUTIVE CERTIFICATION</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and Finance</p>
+                        </div>
+                    </div>
+                    <img src="assets/img/CSOOFFICE.jpeg" alt="CSO Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)" loading="lazy">
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mar de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: 2632267821LA</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação CSO">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-shield-alt"></i>
+                            Information Security Management
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-chess"></i>
+                            Security Strategy
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-building"></i>
+                            Enterprise Security
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Analista SOC -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">SOC</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/ibsec-logo.svg" alt="IBSEC Logo" class="cert-logo mr-4" loading="lazy">
+                        <div>
+                            <h3 class="font-semibold">Analista SOC</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">IBSEC - Instituto Brasileiro de Cibersegurança</p>
+                        </div>
+                    </div>
+                    <img src="assets/img/Certficação Analista SOC.jpg" alt="Analista SOC Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)" loading="lazy">
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Emitido em mar de 2025 · Expira em mar de 2028</span>
+                    </div>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Analista SOC">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                </div>
+
+                <!-- ISO 27001 -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">ISO</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/exin-logo.svg" alt="EXIN Logo" class="cert-logo mr-4" loading="lazy">
+                        <div>
+                            <h3 class="font-semibold">ISO 27001 - Fundamentos em Segurança da Informação</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">EXIN</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-36668866-b5dd-46b9-bdbc-7ab8efe26512</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação ISO 27001">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-shield-alt"></i>
+                            Norma ISO 27001
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-search"></i>
+                            Auditoria de Sistemas
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Gestão de Riscos
+                        </span>
+                    </div>
+                </div>
+
+                <!-- CCNA CCENT -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">CCNA</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.svg" alt="Udemy Logo" class="udemy-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Certificação Cisco CCNA CCENT 100-105</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mar de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-8e9cd9f2-400d-440b-b71e-b6b75df0b0c2</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação CCNA">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-network-wired"></i>
+                            Configuração de redes Cisco
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-server"></i>
+                            Gestão de Redes
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificações de Gestão e Liderança -->
+        <section class="mb-12" data-aos="fade-up">
+            <h2 class="text-2xl font-semibold mb-6">Gestão e Liderança</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Executive Diploma -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">DIPLOMA</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/institute-logo.svg" alt="Institute Logo" class="cert-logo mr-4" loading="lazy">
+                        <div>
+                            <h3 class="font-semibold">EXECUTIVE DIPLOMA IN LEADERSHIP AND MANAGEMENT</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and Finance</p>
+                        </div>
+                    </div>
+                    <img src="assets/img/EXECUTIVE DIPLOMA IN LEADERSHIP.jpeg" alt="Executive Diploma" class="cert-image-preview mb-4" onclick="openModal(this.src)" loading="lazy">
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mar de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: 6738268064LA</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Executive Diploma">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                </div>
+
+                <!-- Fast MBA -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">MBA</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.svg" alt="Udemy Logo" class="udemy-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Fast MBA em Liderança e Gestão de Pessoas</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mar de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-a5c2e4d2-fd0a-4809-a2b0-e771ac651de4</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Fast MBA">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-users"></i>
+                            Liderança de Equipes
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-comments"></i>
+                            Feedback construtivo
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-chart-line"></i>
+                            Gestão operacional
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Scrum Master -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">SCRUM</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/agile-logo.svg" alt="Agile Logo" class="cert-logo mr-4" loading="lazy">
+                        <div>
+                            <h3 class="font-semibold">Advanced Scrum Master Certification</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Agile Enterprise Coach</p>
+                        </div>
+                    </div>
+                    <img src="assets/img/Luciano Calufele Amós - Advanced Scrum Master Certification - Certificate.jpeg" alt="Scrum Master Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)" loading="lazy">
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mar de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: 1003003</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Scrum Master">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificações de Análise de Dados -->
+        <section class="mb-12" data-aos="fade-up">
+            <h2 class="text-2xl font-semibold mb-6">Análise de Dados</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Microsoft Data Analysis -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">DATA</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/microsoft-logo.svg" alt="Microsoft Logo" class="cert-logo mr-4" loading="lazy">
+                        <div>
+                            <h3 class="font-semibold">Fundamentos para Análise de Dados</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Microsoft e LinkedIn</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mar de 2025</span>
+                    </div>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Microsoft Data Analysis">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-chart-bar"></i>
+                            Visualização de dados
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-database"></i>
+                            Analítica de dados
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Excel e Power BI -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">EXCEL</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.svg" alt="Udemy Logo" class="udemy-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Microsoft Excel Avançado & Power BI</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-63a5fae4-c851-4285-9ef5-665e2fe75b2e</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Excel e Power BI">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-chart-line"></i>
+                            Microsoft Power BI
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-table"></i>
+                            Microsoft Excel
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-code"></i>
+                            VBA
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificações de Comunicação e Atendimento -->
+        <section class="mb-12" data-aos="fade-up">
+            <h2 class="text-2xl font-semibold mb-6">Comunicação e Atendimento ao Cliente</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Comunicação e Oratória -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">COM</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.svg" alt="Udemy Logo" class="udemy-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Comunicação e Oratória Profissional</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mar de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-7f19b1e2-56c0-427a-b510-7483c2521e44</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Comunicação e Oratória">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-comments"></i>
+                            Comunicação Eficaz
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-users"></i>
+                            Gestão de clientes
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Atendimento ao Cliente LinkedIn -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">CS</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/linkedin-logo.svg" alt="LinkedIn Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Atendimento ao Cliente: Técnicas de Resolução de Problemas e Conflitos</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">LinkedIn</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Atendimento ao Cliente">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-headset"></i>
+                            Atendimento ao cliente
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-tools"></i>
+                            Solução de problemas técnicos
+                        </span>
+        </div>
+        </div>
+
+                <!-- Qualidade no Atendimento -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">QA</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/linkedin-logo.svg" alt="LinkedIn Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Como Estabelecer Padrões de Qualidade no Atendimento ao Cliente</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">LinkedIn</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Qualidade no Atendimento">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-star"></i>
+                            Gestão de serviços de atendimento
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificações de Gestão de Segurança e Sistemas Integrados -->
+        <section class="mb-12" data-aos="fade-up">
+            <h2 class="text-2xl font-semibold mb-6">Gestão de Segurança e Sistemas Integrados</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Formação para Gestores de Segurança -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">SEC</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/protector-logo.svg" alt="Protector Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Formação para Gestores de Segurança</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Protector - Protecção e Vigilância</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mai de 2018</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: PROT.SRSF.DEC.0001</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Formação para Gestores de Segurança">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-shield-alt"></i>
+                            Segurança Operacional
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-users"></i>
+                            Gestão de Equipes
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Gestão de Riscos
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Sistemas de Gestão Integrada -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">ISO</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.svg" alt="Udemy Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Sistemas de Gestão Integrada ISO 9001/14001/45001</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-60fde10d-d607-4253-87ac-56a271712901</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Sistemas de Gestão Integrada">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-certificate"></i>
+                            Normas ISO
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-shield-alt"></i>
+                            Segurança de processos
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Gestão de Sistemas Integrados -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">SGI</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.png" alt="Udemy Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Gestão de Sistemas Integrados (SGI) - Formação de Gestor</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-f5c73d4a-af73-40db-8d42-dad54e893dc6</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Gestão de Sistemas Integrados">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-cogs"></i>
+                            Sistemas de Gestão Integrados
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-certificate"></i>
+                            ISO 9001/45001
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Supervisão em Segurança Operacional -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">SUP</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.png" alt="Udemy Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Supervisão em Segurança Operacional - Práticas Avançadas</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-c45b7373-efe4-45d7-a685-f957b44ea265</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Supervisão em Segurança Operacional">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-shield-alt"></i>
+                            Segurança Operacional
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-users"></i>
+                            Gestão de Equipes
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificações de Gestão de Estoques e Supply Chain -->
+        <section class="mb-12" data-aos="fade-up">
+            <h2 class="text-2xl font-semibold mb-6">Gestão de Estoques e Supply Chain</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Gestão Avançada de Estoques -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">EST</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.png" alt="Udemy Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Gestão Avançada de Estoques e Inventário</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                                </div>
+                            </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-a9a52967-aec5-4613-94ce-5cbf59892864</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Gestão Avançada de Estoques">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-boxes"></i>
+                            Controle de inventário
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-warehouse"></i>
+                            Gestão de estoques
+                        </span>
+                                </div>
+                            </div>
+
+                <!-- Gestão Estratégica de Estoques -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">SCM</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.png" alt="Udemy Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Gestão Estratégica de Estoques</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-d4d6e441-059f-40c5-8362-7d68d4cf0fff</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Gestão Estratégica de Estoques">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-truck"></i>
+                            Supply Chain Management
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-chart-line"></i>
+                            Planejamento de demanda
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificações de Data Science e Análise de Dados -->
+        <section class="mb-12" data-aos="fade-up">
+            <h2 class="text-2xl font-semibold mb-6">Data Science e Análise de Dados</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Fundamentos de Data Science -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">DS</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/dsa-logo.svg" alt="Data Science Academy Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Fundamentos de Data Science e Inteligência Artificial</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Data Science Academy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: 66bd6436f1588081cb08a019</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Data Science">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-brain"></i>
+                            Data Science
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-robot"></i>
+                            Inteligência Artificial
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Excel Avançado e Power BI -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">EXCEL</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.png" alt="Udemy Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Microsoft Excel Avançado & Power BI - Formação Completa</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-63a5fae4-c851-4285-9ef5-665e2fe75b2e</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Excel e Power BI">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-chart-line"></i>
+                            Microsoft Power BI
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-table"></i>
+                            Microsoft Excel
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-code"></i>
+                            VBA
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Simplifica Excel -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">EXCEL</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/simplifica-logo.svg" alt="Simplifica Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Simplifica Excel Express</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">SIMPLIFICA TREINAMENTOS</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em jul de 2022</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: 42.875.361/0001-21</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Simplifica Excel">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-table"></i>
+                            Microsoft Excel
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-code"></i>
+                            Algoritmos e Estruturas de Dados
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificações de Oratória e Comunicação -->
+        <section class="mb-12" data-aos="fade-up">
+            <h2 class="text-2xl font-semibold mb-6">Oratória e Comunicação</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Oratória de Alta Performance -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">ORAT</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/kultivi-logo.svg" alt="Kultivi Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Oratória de Alta Performance</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Kultivi</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mar de 2022</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: 61d59074-e665-4356-89c3-07e84756678c</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Oratória">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-user-tie"></i>
+                            Presença executiva
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-comments"></i>
+                            Comunicação de alto impacto
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Executive Assistant -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">EAPC</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/institute-logo.svg" alt="Institute Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">EXECUTIVE ASSISTANT PROFESSIONAL CERTIFICATION (EAPC)</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and Finance</p>
+                                </div>
+                            </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mar de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: 1689578582LA</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Executive Assistant">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-comments"></i>
+                            Comunicação de alto impacto
+                        </span>
+                                </div>
+                            </div>
+
+                <!-- Networking -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">NET</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/linkedin-logo.svg" alt="LinkedIn Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Networking: Como Criar uma Rede de Contatos Profissionais</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">LinkedIn</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Networking">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-network-wired"></i>
+                            Rede de contatos profissionais
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificações de Freelancing e Gestão de Negócios -->
+        <section class="mb-12" data-aos="fade-up">
+            <h2 class="text-2xl font-semibold mb-6">Freelancing e Gestão de Negócios</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Freelancing Professional -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">FRE</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/institute-logo.svg" alt="Institute Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">FREELANCING PROFESSIONAL CERTIFICATION</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and Finance</p>
+                        </div>
+                    </div>
+                    <img src="assets/img/Diploma Free Lacing.jpeg" alt="Freelancing Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)">
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mar de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: 9047795326LA</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Freelancing">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                </div>
+
+                <!-- Office Administration -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">OAM</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/institute-logo.svg" alt="Institute Logo" class="cert-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Office Administration Management Professional Certification</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and Finance</p>
+                        </div>
+                    </div>
+                    <img src="assets/img/DiplomaOfficeA_dminstration.jpeg" alt="Office Administration Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)">
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em mar de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: 5326126132LA</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Office Administration">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-star"></i>
+                            Gestão da qualidade
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-cogs"></i>
+                            Processos empresariais
+                        </span>
+                                </div>
+                            </div>
+
+                <!-- SAP ERP -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">SAP</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.svg" alt="Udemy Logo" class="udemy-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Formação Profissional em SAP ERP</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-6c3ec641-54a8-4ab5-9bce-a9df2e2b4d0b</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação SAP ERP">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-database"></i>
+                            SAP ERP
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-cogs"></i>
+                            Processos empresariais
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-network-wired"></i>
+                            Sistemas Integrados
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificações de Segurança e Cibersegurança -->
+        <section class="mb-12" data-aos="fade-up">
+            <h2 class="text-2xl font-semibold mb-6">Segurança e Cibersegurança</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Fundamentos de Cybersecurity -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">CS</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.svg" alt="Udemy Logo" class="udemy-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Fundamentos de Cybersecurity e Segurança da Informação</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <img src="assets/img/Fundamentos Cybersegurança.jpg" alt="Cybersecurity Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)">
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-d04c8eaa-3c9f-4780-b192-a33b1f5b9483</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Cybersecurity">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-shield-alt"></i>
+                            Cybersecurity
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-search"></i>
+                            Auditoria de Sistemas
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Análise de Riscos
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Segurança Defensiva -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">DEF</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.svg" alt="Udemy Logo" class="udemy-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Segurança Defensiva e Gestão de Incidentes</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-53542ebc-bc5f-454b-8b72-38ff19d98f59</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Segurança Defensiva">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-shield-alt"></i>
+                            Segurança Defensiva
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Resposta a incidentes
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Segurança Patrimonial -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">PAT</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.svg" alt="Udemy Logo" class="udemy-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Planejamento e Gestão de Segurança Patrimonial</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-f74886fb-7531-45d8-af5f-962081ba8441</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Segurança Patrimonial">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-building"></i>
+                            Segurança Patrimonial
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Análise de Riscos
+                        </span>
+                                </div>
+                            </div>
+
+                <!-- CFTV -->
+                <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
+                    <span class="cert-badge">CFTV</span>
+                    <div class="flex items-center mb-4">
+                        <img src="img/udemy-logo.svg" alt="Udemy Logo" class="udemy-logo mr-4">
+                        <div>
+                            <h3 class="font-semibold">Instalação e Configuração de Sistemas CFTV 2.0</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
+                        </div>
+                    </div>
+                    <div class="cert-date mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Verificação emitida em fev de 2025</span>
+                    </div>
+                    <p class="text-sm mb-4">Código: UC-32b62444-eea6-4515-b92a-aa8231804418</p>
+                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação CFTV">
+                        <i class="fas fa-external-link-alt"></i>
+                        Verificar Certificação
+                    </a>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-video"></i>
+                            CFTV
+                        </span>
+                        <span class="cert-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100">
+                            <i class="fas fa-cogs"></i>
+                            Sistemas integrados
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 shadow-sm mt-12">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm text-gray-600 dark:text-gray-400">&copy; 2024 Luciano Amós. Todos os direitos reservados.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para exibir imagens -->
+    <div id="certModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" class="modal-image" src="" alt="Certificado">
+        </div>
+    </div>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Adiciona suporte a teclado para navegação
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                document.body.classList.add('user-is-tabbing');
+            }
+        });
+
+        document.addEventListener('mousedown', function() {
+            document.body.classList.remove('user-is-tabbing');
+        });
+
+        // Adiciona botão de alternar tema
+        const themeToggle = document.createElement('button');
+        themeToggle.className = 'fixed bottom-4 right-4 p-2 rounded-full bg-primary text-white shadow-lg focus-visible';
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        themeToggle.setAttribute('aria-label', 'Alternar tema claro/escuro');
+        document.body.appendChild(themeToggle);
+
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const icon = themeToggle.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        });
+
+        // Adiciona animação de hover nos cards
+        document.querySelectorAll('.cert-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Funcionalidade do Modal
+        const modal = document.getElementById('certModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.getElementsByClassName('close-modal')[0];
+
+        // Função para abrir o modal
+        function openModal(imgSrc) {
+            modal.style.display = 'block';
+            modalImg.src = imgSrc;
+        }
+
+        // Fechar modal ao clicar no X
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Fechar modal ao clicar fora da imagem
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Fechar modal com a tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+
+    <!-- Theme Switch Button -->
+    <div class="theme-switch" id="themeSwitch">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Shared Script -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+
