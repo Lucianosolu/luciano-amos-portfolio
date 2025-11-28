@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt" class="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,229 +8,29 @@
     <meta name="keywords" content="certificações, segurança, TI, ISO, CSO, Cisco">
     <meta name="author" content="Luciano Amós">
     <title>Certificações - Especialista em Segurança Integrada & TI</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
-    
+
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#17a2b8">
-    
+
     <!-- TailwindCSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+    <link href="./tailwind.css" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Shared Styles -->
     <link rel="stylesheet" href="styles.css">
-
-    <style>
-        :root {
-            --primary: #17a2b8;
-            --background: #f8f9fa;
-            --text: #343a40;
-            --card-bg: #ffffff;
-            --border: rgba(0, 0, 0, 0.1);
-        }
-
-        html.dark {
-            --primary: #20c997;
-            --background: #1a1a1a;
-            --text: #f8f9fa;
-            --card-bg: #2d2d2d;
-            --border: rgba(255, 255, 255, 0.1);
-        }
-
-        .cert-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cert-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .cert-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--primary);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .cert-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .cert-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: var(--primary);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            z-index: 1;
-        }
-
-        .cert-verify {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--primary);
-            color: white;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .cert-verify:hover {
-            background: #138496;
-            transform: translateY(-2px);
-        }
-
-        .cert-verify i {
-            font-size: 0.75rem;
-        }
-
-        .cert-logo {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            border-radius: 8px;
-            background: white;
-            padding: 4px;
-        }
-
-        .dark .cert-logo {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .cert-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        .cert-tag i {
-            font-size: 0.625rem;
-        }
-
-        .focus-visible:focus {
-            outline: 2px solid var(--primary);
-            outline-offset: 2px;
-        }
-
-        .user-is-tabbing .focus-visible:focus {
-            outline: 2px solid var(--primary);
-            outline-offset: 2px;
-        }
-
-        .cert-date {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #6c757d;
-            font-size: 0.875rem;
-        }
-
-        .cert-date i {
-            color: var(--primary);
-        }
-
-        /* Estilos do Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            position: relative;
-            margin: auto;
-            padding: 20px;
-            width: 90%;
-            max-width: 1200px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .modal-image {
-            width: 100%;
-            height: auto;
-            max-height: 90vh;
-            object-fit: contain;
-        }
-
-        .close-modal {
-            position: absolute;
-            right: 25px;
-            top: 10px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close-modal:hover {
-            color: #bbb;
-        }
-
-        .cert-image-preview {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-
-        .cert-image-preview:hover {
-            opacity: 0.8;
-        }
-
-        /* Estilos do logo Udemy */
-        .udemy-logo {
-            width: 48px;
-            height: 32px;
-            object-fit: contain;
-            border-radius: 4px;
-            background: white;
-            padding: 4px;
-            filter: brightness(0) invert(1);
-        }
-
-        .dark .udemy-logo {
-            filter: none;
-            background: transparent;
-        }
-    </style>
 </head>
+
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
     <!-- Header -->
     <header class="bg-white dark:bg-gray-800 shadow-sm">
@@ -242,10 +43,14 @@
                         </a>
                     </div>
                     <div class="hidden md:flex items-center space-x-1">
-                        <a href="experiencia.html" class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Experiência</a>
-                        <a href="tecnologias.html" class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Tecnologias</a>
-                        <a href="competencias.html" class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Competências</a>
-                        <a href="certificacoes.html" class="py-4 px-2 text-primary border-b-2 border-primary">Certificações</a>
+                        <a href="experiencia.html"
+                            class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Experiência</a>
+                        <a href="tecnologias.html"
+                            class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Tecnologias</a>
+                        <a href="competencias.html"
+                            class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Competências</a>
+                        <a href="certificacoes.html"
+                            class="py-4 px-2 text-primary border-b-2 border-primary">Certificações</a>
                     </div>
                     <!-- Botão Mobile -->
                     <div class="md:hidden flex items-center">
@@ -258,10 +63,17 @@
             <!-- Menu Mobile -->
             <div class="hidden mobile-menu">
                 <ul class="">
-                    <li><a href="experiencia.html" class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Experiência</a></li>
-                    <li><a href="tecnologias.html" class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Tecnologias</a></li>
-                    <li><a href="competencias.html" class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Competências</a></li>
-                    <li><a href="certificacoes.html" class="block text-sm px-2 py-4 bg-primary text-white">Certificações</a></li>
+                    <li><a href="experiencia.html"
+                            class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Experiência</a>
+                    </li>
+                    <li><a href="tecnologias.html"
+                            class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Tecnologias</a>
+                    </li>
+                    <li><a href="competencias.html"
+                            class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Competências</a>
+                    </li>
+                    <li><a href="certificacoes.html"
+                            class="block text-sm px-2 py-4 bg-primary text-white">Certificações</a></li>
                 </ul>
             </div>
         </nav>
@@ -272,14 +84,16 @@
         <!-- Introdução Profissional -->
         <section class="mb-12 text-center max-w-4xl mx-auto" data-aos="fade-up">
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-                
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+                </div>
+
                 <h1 class="text-4xl font-bold mb-4">Luciano Amós</h1>
                 <h2 class="text-2xl text-primary mb-6">Especialista em Segurança Integrada & Gestão Corporativa</h2>
-                
+
                 <p class="text-lg mb-6 leading-relaxed">
-                    🛡️ Chief Security Officer (CSO) com mais de 12 anos de experiência em segurança corporativa integrada, 
-                    combinando expertise em proteção física e digital. Certificado em gestão executiva pelo Institute of 
+                    🛡️ Chief Security Officer (CSO) com mais de 12 anos de experiência em segurança corporativa
+                    integrada,
+                    combinando expertise em proteção física e digital. Certificado em gestão executiva pelo Institute of
                     Management, Technology and Finance (MTF).
                 </p>
 
@@ -308,10 +122,12 @@
                     <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full">
                         <i class="fas fa-check-circle mr-2"></i>Consultoria Especializada
                     </span>
-                    <span class="px-4 py-2 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100 rounded-full">
+                    <span
+                        class="px-4 py-2 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100 rounded-full">
                         <i class="fas fa-star mr-2"></i>Gestão de Equipes
                     </span>
-                    <span class="px-4 py-2 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 rounded-full">
+                    <span
+                        class="px-4 py-2 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 rounded-full">
                         <i class="fas fa-chart-line mr-2"></i>Melhoria Contínua
                     </span>
                 </div>
@@ -319,7 +135,7 @@
         </section>
 
         <h1 class="text-4xl font-bold mb-8 text-center">Certificações Profissionais</h1>
-        
+
         <!-- Certificações de Segurança e TI -->
         <section class="mb-12" data-aos="fade-up">
             <h2 class="text-2xl font-semibold mb-6">Segurança e TI</h2>
@@ -331,10 +147,12 @@
                         <img src="img/institute-logo.svg" alt="Institute Logo" class="cert-logo mr-4" loading="lazy">
                         <div>
                             <h3 class="font-semibold">CSO CHIEF SECURITY OFFICER EXECUTIVE CERTIFICATION</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and Finance</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and
+                                Finance</p>
                         </div>
                     </div>
-                    <img src="assets/img/CSOOFFICE.jpeg" alt="CSO Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)" loading="lazy">
+                    <img src="assets/img/CSOOFFICE.jpeg" alt="CSO Certification" class="cert-image-preview mb-4"
+                        onclick="openModal(this.src)" loading="lazy">
                     <div class="cert-date mb-4">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Verificação emitida em mar de 2025</span>
@@ -367,10 +185,12 @@
                         <img src="img/ibsec-logo.svg" alt="IBSEC Logo" class="cert-logo mr-4" loading="lazy">
                         <div>
                             <h3 class="font-semibold">Analista SOC</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">IBSEC - Instituto Brasileiro de Cibersegurança</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">IBSEC - Instituto Brasileiro de
+                                Cibersegurança</p>
                         </div>
                     </div>
-                    <img src="assets/img/Certficação Analista SOC.jpg" alt="Analista SOC Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)" loading="lazy">
+                    <img src="assets/img/Certficação Analista SOC.jpg" alt="Analista SOC Certification"
+                        class="cert-image-preview mb-4" onclick="openModal(this.src)" loading="lazy">
                     <div class="cert-date mb-4">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Emitido em mar de 2025 · Expira em mar de 2028</span>
@@ -460,10 +280,12 @@
                         <img src="img/institute-logo.svg" alt="Institute Logo" class="cert-logo mr-4" loading="lazy">
                         <div>
                             <h3 class="font-semibold">EXECUTIVE DIPLOMA IN LEADERSHIP AND MANAGEMENT</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and Finance</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and
+                                Finance</p>
                         </div>
                     </div>
-                    <img src="assets/img/EXECUTIVE DIPLOMA IN LEADERSHIP.jpeg" alt="Executive Diploma" class="cert-image-preview mb-4" onclick="openModal(this.src)" loading="lazy">
+                    <img src="assets/img/EXECUTIVE DIPLOMA IN LEADERSHIP.jpeg" alt="Executive Diploma"
+                        class="cert-image-preview mb-4" onclick="openModal(this.src)" loading="lazy">
                     <div class="cert-date mb-4">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Verificação emitida em mar de 2025</span>
@@ -520,7 +342,9 @@
                             <p class="text-sm text-gray-600 dark:text-gray-400">Agile Enterprise Coach</p>
                         </div>
                     </div>
-                    <img src="assets/img/Luciano Calufele Amós - Advanced Scrum Master Certification - Certificate.jpeg" alt="Scrum Master Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)" loading="lazy">
+                    <img src="assets/img/Luciano Calufele Amós - Advanced Scrum Master Certification - Certificate.jpeg"
+                        alt="Scrum Master Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)"
+                        loading="lazy">
                     <div class="cert-date mb-4">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Verificação emitida em mar de 2025</span>
@@ -552,7 +376,8 @@
                         <i class="fas fa-calendar-alt"></i>
                         <span>Verificação emitida em mar de 2025</span>
                     </div>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Microsoft Data Analysis">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Microsoft Data Analysis">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -624,7 +449,8 @@
                         <span>Verificação emitida em mar de 2025</span>
                     </div>
                     <p class="text-sm mb-4">Código: UC-7f19b1e2-56c0-427a-b510-7483c2521e44</p>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Comunicação e Oratória">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Comunicação e Oratória">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -646,7 +472,8 @@
                     <div class="flex items-center mb-4">
                         <img src="img/linkedin-logo.svg" alt="LinkedIn Logo" class="cert-logo mr-4">
                         <div>
-                            <h3 class="font-semibold">Atendimento ao Cliente: Técnicas de Resolução de Problemas e Conflitos</h3>
+                            <h3 class="font-semibold">Atendimento ao Cliente: Técnicas de Resolução de Problemas e
+                                Conflitos</h3>
                             <p class="text-sm text-gray-600 dark:text-gray-400">LinkedIn</p>
                         </div>
                     </div>
@@ -654,7 +481,8 @@
                         <i class="fas fa-calendar-alt"></i>
                         <span>Verificação emitida em fev de 2025</span>
                     </div>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Atendimento ao Cliente">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Atendimento ao Cliente">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -667,8 +495,8 @@
                             <i class="fas fa-tools"></i>
                             Solução de problemas técnicos
                         </span>
-        </div>
-        </div>
+                    </div>
+                </div>
 
                 <!-- Qualidade no Atendimento -->
                 <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
@@ -676,7 +504,8 @@
                     <div class="flex items-center mb-4">
                         <img src="img/linkedin-logo.svg" alt="LinkedIn Logo" class="cert-logo mr-4">
                         <div>
-                            <h3 class="font-semibold">Como Estabelecer Padrões de Qualidade no Atendimento ao Cliente</h3>
+                            <h3 class="font-semibold">Como Estabelecer Padrões de Qualidade no Atendimento ao Cliente
+                            </h3>
                             <p class="text-sm text-gray-600 dark:text-gray-400">LinkedIn</p>
                         </div>
                     </div>
@@ -684,7 +513,8 @@
                         <i class="fas fa-calendar-alt"></i>
                         <span>Verificação emitida em fev de 2025</span>
                     </div>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Qualidade no Atendimento">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Qualidade no Atendimento">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -717,7 +547,8 @@
                         <span>Verificação emitida em mai de 2018</span>
                     </div>
                     <p class="text-sm mb-4">Código: PROT.SRSF.DEC.0001</p>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Formação para Gestores de Segurança">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Formação para Gestores de Segurança">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -752,7 +583,8 @@
                         <span>Verificação emitida em fev de 2025</span>
                     </div>
                     <p class="text-sm mb-4">Código: UC-60fde10d-d607-4253-87ac-56a271712901</p>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Sistemas de Gestão Integrada">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Sistemas de Gestão Integrada">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -783,7 +615,8 @@
                         <span>Verificação emitida em fev de 2025</span>
                     </div>
                     <p class="text-sm mb-4">Código: UC-f5c73d4a-af73-40db-8d42-dad54e893dc6</p>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Gestão de Sistemas Integrados">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Gestão de Sistemas Integrados">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -814,7 +647,8 @@
                         <span>Verificação emitida em fev de 2025</span>
                     </div>
                     <p class="text-sm mb-4">Código: UC-c45b7373-efe4-45d7-a685-f957b44ea265</p>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Supervisão em Segurança Operacional">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Supervisão em Segurança Operacional">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -844,14 +678,15 @@
                         <div>
                             <h3 class="font-semibold">Gestão Avançada de Estoques e Inventário</h3>
                             <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
                     <div class="cert-date mb-4">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Verificação emitida em fev de 2025</span>
                     </div>
                     <p class="text-sm mb-4">Código: UC-a9a52967-aec5-4613-94ce-5cbf59892864</p>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Gestão Avançada de Estoques">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Gestão Avançada de Estoques">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -864,8 +699,8 @@
                             <i class="fas fa-warehouse"></i>
                             Gestão de estoques
                         </span>
-                                </div>
-                            </div>
+                    </div>
+                </div>
 
                 <!-- Gestão Estratégica de Estoques -->
                 <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
@@ -882,7 +717,8 @@
                         <span>Verificação emitida em fev de 2025</span>
                     </div>
                     <p class="text-sm mb-4">Código: UC-d4d6e441-059f-40c5-8362-7d68d4cf0fff</p>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Gestão Estratégica de Estoques">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Gestão Estratégica de Estoques">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -1045,15 +881,17 @@
                         <img src="img/institute-logo.svg" alt="Institute Logo" class="cert-logo mr-4">
                         <div>
                             <h3 class="font-semibold">EXECUTIVE ASSISTANT PROFESSIONAL CERTIFICATION (EAPC)</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and Finance</p>
-                                </div>
-                            </div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and
+                                Finance</p>
+                        </div>
+                    </div>
                     <div class="cert-date mb-4">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Verificação emitida em mar de 2025</span>
                     </div>
                     <p class="text-sm mb-4">Código: 1689578582LA</p>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Executive Assistant">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Executive Assistant">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -1062,8 +900,8 @@
                             <i class="fas fa-comments"></i>
                             Comunicação de alto impacto
                         </span>
-                                </div>
-                            </div>
+                    </div>
+                </div>
 
                 <!-- Networking -->
                 <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
@@ -1104,10 +942,12 @@
                         <img src="img/institute-logo.svg" alt="Institute Logo" class="cert-logo mr-4">
                         <div>
                             <h3 class="font-semibold">FREELANCING PROFESSIONAL CERTIFICATION</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and Finance</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and
+                                Finance</p>
                         </div>
                     </div>
-                    <img src="assets/img/Diploma Free Lacing.jpeg" alt="Freelancing Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)">
+                    <img src="assets/img/Diploma Free Lacing.jpeg" alt="Freelancing Certification"
+                        class="cert-image-preview mb-4" onclick="openModal(this.src)">
                     <div class="cert-date mb-4">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Verificação emitida em mar de 2025</span>
@@ -1126,16 +966,19 @@
                         <img src="img/institute-logo.svg" alt="Institute Logo" class="cert-logo mr-4">
                         <div>
                             <h3 class="font-semibold">Office Administration Management Professional Certification</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and Finance</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Institute of Management, Technology and
+                                Finance</p>
                         </div>
                     </div>
-                    <img src="assets/img/DiplomaOfficeA_dminstration.jpeg" alt="Office Administration Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)">
+                    <img src="assets/img/DiplomaOfficeA_dminstration.jpeg" alt="Office Administration Certification"
+                        class="cert-image-preview mb-4" onclick="openModal(this.src)">
                     <div class="cert-date mb-4">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Verificação emitida em mar de 2025</span>
                     </div>
                     <p class="text-sm mb-4">Código: 5326126132LA</p>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Office Administration">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Office Administration">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -1148,8 +991,8 @@
                             <i class="fas fa-cogs"></i>
                             Processos empresariais
                         </span>
-                                </div>
-                            </div>
+                    </div>
+                </div>
 
                 <!-- SAP ERP -->
                 <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
@@ -1202,7 +1045,8 @@
                             <p class="text-sm text-gray-600 dark:text-gray-400">Udemy</p>
                         </div>
                     </div>
-                    <img src="assets/img/Fundamentos Cybersegurança.jpg" alt="Cybersecurity Certification" class="cert-image-preview mb-4" onclick="openModal(this.src)">
+                    <img src="assets/img/Fundamentos Cybersegurança.jpg" alt="Cybersecurity Certification"
+                        class="cert-image-preview mb-4" onclick="openModal(this.src)">
                     <div class="cert-date mb-4">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Verificação emitida em fev de 2025</span>
@@ -1243,7 +1087,8 @@
                         <span>Verificação emitida em fev de 2025</span>
                     </div>
                     <p class="text-sm mb-4">Código: UC-53542ebc-bc5f-454b-8b72-38ff19d98f59</p>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Segurança Defensiva">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Segurança Defensiva">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -1274,7 +1119,8 @@
                         <span>Verificação emitida em fev de 2025</span>
                     </div>
                     <p class="text-sm mb-4">Código: UC-f74886fb-7531-45d8-af5f-962081ba8441</p>
-                    <a href="#" class="cert-verify focus-visible" aria-label="Verificar certificação Segurança Patrimonial">
+                    <a href="#" class="cert-verify focus-visible"
+                        aria-label="Verificar certificação Segurança Patrimonial">
                         <i class="fas fa-external-link-alt"></i>
                         Verificar Certificação
                     </a>
@@ -1287,8 +1133,8 @@
                             <i class="fas fa-exclamation-triangle"></i>
                             Análise de Riscos
                         </span>
-                                </div>
-                            </div>
+                    </div>
+                </div>
 
                 <!-- CFTV -->
                 <div class="cert-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative" data-aos="fade-up">
@@ -1329,7 +1175,8 @@
         <div class="container mx-auto px-4 py-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
-                    <p class="text-sm text-gray-600 dark:text-gray-400">&copy; 2024 Luciano Amós. Todos os direitos reservados.</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">&copy; 2024 Luciano Amós. Todos os direitos
+                        reservados.</p>
                 </div>
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary">
@@ -1354,79 +1201,6 @@
         </div>
     </div>
 
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100
-        });
-
-        // Adiciona suporte a teclado para navegação
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Tab') {
-                document.body.classList.add('user-is-tabbing');
-            }
-        });
-
-        document.addEventListener('mousedown', function() {
-            document.body.classList.remove('user-is-tabbing');
-        });
-
-        // Adiciona botão de alternar tema
-        const themeToggle = document.createElement('button');
-        themeToggle.className = 'fixed bottom-4 right-4 p-2 rounded-full bg-primary text-white shadow-lg focus-visible';
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        themeToggle.setAttribute('aria-label', 'Alternar tema claro/escuro');
-        document.body.appendChild(themeToggle);
-
-        themeToggle.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            const icon = themeToggle.querySelector('i');
-            icon.classList.toggle('fa-moon');
-            icon.classList.toggle('fa-sun');
-        });
-
-        // Adiciona animação de hover nos cards
-        document.querySelectorAll('.cert-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-5px)';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-            });
-        });
-
-        // Funcionalidade do Modal
-        const modal = document.getElementById('certModal');
-        const modalImg = document.getElementById('modalImage');
-        const closeBtn = document.getElementsByClassName('close-modal')[0];
-
-        // Função para abrir o modal
-        function openModal(imgSrc) {
-            modal.style.display = 'block';
-            modalImg.src = imgSrc;
-        }
-
-        // Fechar modal ao clicar no X
-        closeBtn.onclick = function() {
-            modal.style.display = 'none';
-        }
-
-        // Fechar modal ao clicar fora da imagem
-        modal.onclick = function(event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        // Fechar modal com a tecla ESC
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                modal.style.display = 'none';
-            }
-        });
-    </script>
-
     <!-- Theme Switch Button -->
     <div class="theme-switch" id="themeSwitch">
         <i class="fas fa-moon"></i>
@@ -1434,7 +1208,8 @@
 
     <!-- Shared Script -->
     <script src="script.js"></script>
+
+
 </body>
+
 </html>
-
-

@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt" class="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tecnologias - Especialista em Segurança Integrada & TI | Sistemas CCTV e Controle de Acesso">
-    <meta name="keywords" content="CCTV, controle de acesso, segurança integrada, gestão de segurança, sistemas de monitoramento">
+    <meta name="description"
+        content="Tecnologias - Especialista em Segurança Integrada & TI | Sistemas CCTV e Controle de Acesso">
+    <meta name="keywords"
+        content="CCTV, controle de acesso, segurança integrada, gestão de segurança, sistemas de monitoramento">
     <meta name="author" content="Luciano Amós">
     <title>Tecnologias - Especialista em Segurança Integrada</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
-    
+
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#17a2b8">
-    
+
     <!-- TailwindCSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+    <link href="./tailwind.css" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+
     <!-- ScrollReveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
 
@@ -31,113 +34,9 @@
 
     <!-- Shared Styles -->
     <link rel="stylesheet" href="styles.css">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#17a2b8',
-                        background: '#f8f9fa',
-                        text: '#343a40',
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        /* Theme Variables */
-        :root {
-            --primary: #17a2b8;
-            --background: #f8f9fa;
-            --text: #343a40;
-            --card-bg: #ffffff;
-            --border: rgba(0, 0, 0, 0.1);
-            --hover-shadow: rgba(0, 0, 0, 0.1);
-        }
-
-        /* Dark Theme Variables */
-        html.dark {
-            --primary: #20c997;
-            --background: #1a1a1a;
-            --text: #f8f9fa;
-            --card-bg: #2d2d2d;
-            --border: rgba(255, 255, 255, 0.1);
-            --hover-shadow: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Theme Switch */
-        .theme-switch {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            z-index: 1000;
-            background: var(--card-bg);
-            border-radius: 50%;
-            padding: 10px;
-            box-shadow: 0 2px 10px var(--hover-shadow);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .theme-switch:hover {
-            transform: scale(1.1);
-        }
-
-        .theme-switch i {
-            font-size: 24px;
-            color: var(--primary);
-        }
-
-        /* Apply theme variables to existing styles */
-        body {
-            background-color: var(--background);
-            color: var(--text);
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .bg-white {
-            background-color: var(--card-bg) !important;
-        }
-
-        .text-gray-500 {
-            color: var(--text) !important;
-            opacity: 0.7;
-        }
-
-        .text-gray-600 {
-            color: var(--text) !important;
-            opacity: 0.8;
-        }
-
-        .shadow-lg {
-            box-shadow: 0 4px 6px var(--hover-shadow) !important;
-        }
-
-        .border-primary {
-            border-color: var(--primary) !important;
-        }
-
-        .text-primary {
-            color: var(--primary) !important;
-        }
-
-        .bg-primary {
-            background-color: var(--primary) !important;
-        }
-
-        .hover\:bg-primary:hover {
-            background-color: var(--primary) !important;
-        }
-    </style>
 </head>
-<body class="bg-background">
-    <!-- Theme Switch Button -->
-    <div class="theme-switch" id="themeSwitch" data-tippy-content="Alternar Tema">
-        <i class="fas fa-moon"></i>
-    </div>
 
+<body class="bg-background">
     <!-- Navbar -->
     <nav class="bg-white shadow-lg fixed w-full z-50">
         <div class="max-w-6xl mx-auto px-4">
@@ -148,10 +47,13 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="experiencia.html" class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Experiência</a>
+                    <a href="experiencia.html"
+                        class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Experiência</a>
                     <a href="tecnologias.html" class="py-4 px-2 text-primary border-b-2 border-primary">Tecnologias</a>
-                    <a href="competencias.html" class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Competências</a>
-                    <a href="certificacoes.html" class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Certificações</a>
+                    <a href="competencias.html"
+                        class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Competências</a>
+                    <a href="certificacoes.html"
+                        class="py-4 px-2 text-gray-500 hover:text-primary transition-colors duration-300">Certificações</a>
                 </div>
                 <!-- Botão Mobile -->
                 <div class="md:hidden flex items-center">
@@ -164,10 +66,17 @@
         <!-- Menu Mobile -->
         <div class="hidden mobile-menu">
             <ul class="">
-                <li><a href="experiencia.html" class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Experiência</a></li>
-                <li><a href="tecnologias.html" class="block text-sm px-2 py-4 bg-primary text-white">Tecnologias</a></li>
-                <li><a href="competencias.html" class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Competências</a></li>
-                <li><a href="certificacoes.html" class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Certificações</a></li>
+                <li><a href="experiencia.html"
+                        class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Experiência</a>
+                </li>
+                <li><a href="tecnologias.html" class="block text-sm px-2 py-4 bg-primary text-white">Tecnologias</a>
+                </li>
+                <li><a href="competencias.html"
+                        class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Competências</a>
+                </li>
+                <li><a href="certificacoes.html"
+                        class="block text-sm px-2 py-4 hover:bg-primary hover:text-white transition-colors duration-300">Certificações</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -178,7 +87,8 @@
         <section class="py-16">
             <div class="text-center reveal">
                 <h1 class="text-4xl md:text-5xl font-bold text-text mb-4">Tecnologias</h1>
-                <p class="text-gray-600 max-w-2xl mx-auto">Expertise em tecnologias de segurança integrada e sistemas de monitoramento para proteção corporativa eficiente.</p>
+                <p class="text-gray-600 max-w-2xl mx-auto">Expertise em tecnologias de segurança integrada e sistemas de
+                    monitoramento para proteção corporativa eficiente.</p>
             </div>
         </section>
 
@@ -401,7 +311,7 @@
                                     </div>
                                 </div>
                             </div>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -542,54 +452,20 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     </main>
 
-    <script>
-        // Theme Switch Logic
-        const themeSwitch = document.getElementById('themeSwitch');
-        const html = document.documentElement;
-        const icon = themeSwitch.querySelector('i');
-
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            html.className = savedTheme;
-            updateThemeIcon(savedTheme === 'dark');
-        }
-
-        themeSwitch.addEventListener('click', () => {
-            const isDark = html.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            updateThemeIcon(isDark);
-        });
-
-        function updateThemeIcon(isDark) {
-            icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-        }
-
-        // ScrollReveal
-        ScrollReveal().reveal('.reveal', {
-            distance: '50px',
-            duration: 1000,
-            easing: 'ease-out',
-            interval: 200
-        });
-
-        // Mobile Menu
-        const btn = document.querySelector("button.mobile-menu-button");
-        const menu = document.querySelector(".mobile-menu");
-
-        btn.addEventListener("click", () => {
-            menu.classList.toggle("hidden");
-        });
-    </script>
+    <!-- Theme Switch Button -->
+    <div class="theme-switch" id="themeSwitch" data-tippy-content="Alternar Tema">
+        <i class="fas fa-moon"></i>
+    </div>
 
     <!-- Shared Script -->
     <script src="script.js"></script>
 </body>
+
 </html>
